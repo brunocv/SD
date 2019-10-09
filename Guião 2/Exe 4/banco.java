@@ -1,26 +1,21 @@
 public class banco extends Thread {
-    private double[] contas;
-
-    public banco(){
-        contas = new double[10];
-        for (int i=0; i<10; i++) contas[i]=1000;
+    
+    public conta conta1;
+    public conta conta2;
+    
+    public banco(conta x, conta y){
+        this.conta1=x;
+        this.conta2=y;
     }
 
-    public void levantar(int conta, double valor){
-        contas[conta] -= valor;
-    }
-
-    public void depositar(int conta,double valor){
-        contas[conta] += valor;
+    public void transferir(conta contaOrigem, conta contaDestino, double valor){
+        synchronized(contaOrigem){
+            synchronized(contaDestino){
+                contaOrigem.levantar(valor);
+                contaDestino.depositar(valor);
+            }
+        }
     }
     
-    public void transferir(int contaOrigem, int contaDestino, double valor){
-        this.levantar(contaOrigem,valor);
-        this.depositar(contaDestino,valor);
-    }
-    
-    public double consulta(int conta){
-        return this.contas[conta];
-    }
 
 }

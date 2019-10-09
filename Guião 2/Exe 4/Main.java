@@ -1,9 +1,12 @@
 public class Main extends Thread{
 
     public static void main(String[] args){
-        banco cr = new banco();
-        for(int i=0; i<10; i++)
-         System.out.println("saldo: " + cr.consulta(i));
+        conta conta1= new conta();
+        conta conta2= new conta();
+        banco cr = new banco(conta1,conta2);
+
+        System.out.println("saldo conta1: " + cr.conta1.consulta());
+        System.out.println("saldo conta2: " + cr.conta2.consulta());
 
         Cliente1 c1 = new Cliente1(cr);
         Cliente2 c2 = new Cliente2(cr);
@@ -19,8 +22,8 @@ public class Main extends Thread{
         }
         catch(Exception e){ System.out.println(e);}
         
-        for(int i=0; i<10; i++)
-            System.out.println("saldo final - "+ cr.consulta(i));
+        System.out.println("saldo final conta1: "+ conta1.consulta());
+        System.out.println("saldo final conta2: "+ conta2.consulta());
 
     }
 }

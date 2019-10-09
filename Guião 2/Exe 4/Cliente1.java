@@ -1,14 +1,15 @@
 public class Cliente1 implements Runnable{
-    public banco cr;
+    private banco cr;
 
     public Cliente1(banco b){
         this.cr = b;
     }
-    public synchronized void run() {
+    
+    public void run() {
         int i = 0;
         while (i < 5) {
-                cr.transferir(0,5,100);
-                i++;
+            cr.transferir(cr.conta1,cr.conta2,100);
+            i++;
         }
     }
 }
