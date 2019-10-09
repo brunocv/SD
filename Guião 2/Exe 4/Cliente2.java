@@ -4,10 +4,10 @@ public class Cliente2 implements Runnable{
     public Cliente2(banco b){
         this.cr = b;
     }
-    public void run() {
+    public synchronized void run() {
         int i = 0;
-        while (i < 100) {
-                cr.credito(5);
+        while (i < 5) {
+                cr.levantar(0,50);
                 i++;
         }
     }

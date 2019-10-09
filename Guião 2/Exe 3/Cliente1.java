@@ -6,8 +6,8 @@ public class Cliente1 implements Runnable{
     }
     public void run() {
         int i = 0;
-        while (i < 100) {
-                cr.debito(5);
+        while (i < 5) {
+                cr.transferir(0,5,100);
                 i++;
         }
     }
