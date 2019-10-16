@@ -14,7 +14,7 @@ public class Conta extends Thread{
         this.valor += n;
     }
 
-    public float consulta(){
+    public synchronized float consulta(){
         return this.valor;
     }
 }
