@@ -19,7 +19,7 @@ public class warehouse{
 
     }
 
-    public void addItem(String s, );
+    //public void addItem(String s, );
     public void supply(String i, int q){
     
         this.stock.get(i).supply(q);  

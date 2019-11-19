@@ -40,7 +40,7 @@ public class item{
         }
 
         this.quantity--;
-        
+        this.isEmpty.signal();        
         this.l.unlock();
     }
 
