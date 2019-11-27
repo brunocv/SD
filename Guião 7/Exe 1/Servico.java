@@ -50,11 +50,19 @@ public class Servico implements Runnable {
     public void servCriarConta(String x, PrintWriter out1){
         
         if (x.contains("criar conta")){
-            float saldo=Float.parseFloat(x.substring(11,x.length()));
-            int id= this.banco.createAccount(saldo);
-            System.out.println("Conta Criada com ID:"+id);
-            out1.println("Conta Criada com ID:" +id + " com saldo:" +saldo);
-            out1.flush();
+            try{
+                float saldo=Float.parseFloat(x.substring(11,x.length()));
+                int id= this.banco.createAccount(saldo);
+                System.out.println("Conta Criada com ID:"+id);
+                out1.println("Conta Criada com ID:" +id + " com saldo:" +saldo);
+                out1.flush();
+            }
+            catch(Exception e){
+                System.out.println("Ardeu");
+                out1.println("Ardeu");
+                out1.flush();
+ 
+            }
         }
 
 
@@ -63,8 +71,8 @@ public class Servico implements Runnable {
     public void servApagarConta(String x, PrintWriter out1){
 
         if(x.contains("apagar conta")){
-            int id= Integer.parseInt(x.substring(13,x.length()));
             try{
+                int id= Integer.parseInt(x.substring(13,x.length()));
                 float saldo = this.banco.closeAccount(id);
                 System.out.println("Conta Apagada com ID:" + id);
                 out1.println("Conta Apagada com ID:" + id + " com saldo:" +saldo);
