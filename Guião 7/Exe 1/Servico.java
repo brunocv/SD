@@ -28,6 +28,7 @@ public class Servico implements Runnable {
                 if (s==null || s.equals("Quit"))       /** Se o cliente escreveu Quit fecha-se a conexao com o cliente **/
                     break;
                 servCriarConta(s,out);
+                servApagarConta(s,out);
                 //out.println(s);             /** Escreve no socket do cliente o que foi lido e envia para o cliente **/
                 //out.flush();                /** Limpa a stream de dados **/
             }
@@ -49,15 +50,34 @@ public class Servico implements Runnable {
     public void servCriarConta(String x, PrintWriter out1){
         
         if (x.contains("criar conta")){
-            float saldo=Float.parseFloat(x.substring(11,x.length()-1));
+            float saldo=Float.parseFloat(x.substring(11,x.length()));
             int id= this.banco.createAccount(saldo);
             System.out.println("Conta Criada com ID:"+id);
-            out1.println("Conta Criada com ID:" +id);
+            out1.println("Conta Criada com ID:" +id + " com saldo:" +saldo);
             out1.flush();
         }
 
 
     }
+
+    public void servApagarConta(String x, PrintWriter out1){
+
+        if(x.contains("apagar conta")){
+            int id= Integer.parseInt(x.substring(13,x.length()));
+            try{
+                float saldo = this.banco.closeAccount(id);
+                System.out.println("Conta Apagada com ID:" + id);
+                out1.println("Conta Apagada com ID:" + id + " com saldo:" +saldo);
+                out1.flush();
+            }
+            catch(Exception e){ 
+                System.out.println("Não existe a conta");
+                out1.println("Não existe");
+                out1.flush();
+            }
+        }
+    }
+
 
 }
 
